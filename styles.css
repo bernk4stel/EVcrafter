@@ -1,3 +1,5 @@
+/* styles.css */
+
 body {
   margin: 0;
   padding: 0;
@@ -5,8 +7,6 @@ body {
   background-color: #171a21;
   color: #c6d4df;
 }
-
-
 
 h1 {
   font-size: 18px;
@@ -19,7 +19,7 @@ h1 {
   padding: 0 5px 15px 15px;
 }
 
-.header { 
+.header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -40,18 +40,14 @@ h1 {
   bottom: 5px;
 }
 
-.links a img{
+.links a img {
   display: block;
   width: 32px;
   height: 32px;
   margin: 7px 7px 0 0;
 }
 
-
-
-
-
-.extension-panel {
+#ev-panel-container {
   border: 1px solid #0a1117;
   background: #0f151f;
   padding: 8px;
@@ -59,17 +55,27 @@ h1 {
   border-radius: 4px;
 }
 
-.extension-panel h2 {
+
+#ev-panel-container h3 {
   margin: 0 0 6px 0;
   font-size: 15px;
 }
+#ev-panel-container a {
+  margin: 12px 0 12px 0;
+  color: #4489b1;
+  text-decoration: none;
+}
+#ev-panel-container a:hover {
+  text-decoration: underline;
+  color: #4d9cca;
+}
 
-.extension-panel ul {
+#ev-panel-container ul {
   padding-left: 18px;
   color: #2E9AF2;
   margin: 0;
 }
 
-.extension-panel ul li {
+#ev-panel-container ul li {
   margin-bottom: 4px;
 }
