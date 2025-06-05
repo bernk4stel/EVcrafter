@@ -1,6 +1,6 @@
 {
   "name": "Steam EV Extension",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Craft EV panels on Steam app pages, modular code without import/export",
   "manifest_version": 3,
 
