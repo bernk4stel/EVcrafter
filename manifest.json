@@ -1,0 +1,54 @@
+{
+  "name": "Steam market extension",
+  "description": "demo description",
+  "version": "0.11",
+  "manifest_version": 3,
+  
+
+  "permissions": [
+    "tabs",
+    "activeTab"
+  ],
+
+  "host_permissions": [
+    "https://store.steampowered.com/*",
+    "https://steamcommunity.com/*"
+  ],
+
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+
+
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Click to open.",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  
+ "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://store.steampowered.com/app/*"], 
+      "js": ["utils.js", "content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+
+
+  "icons": {
+  "16": "icons/icon16.png",
+  "48": "icons/icon48.png",
+  "128": "icons/icon128.png"
+  }
+        
+}
