@@ -1,6 +1,6 @@
 
-const PRICE_FIX_THRESHOLD_CENTS = 150; 
-const WEIGHTS = { common: 0.70, uncommon: 0.20, rare: 0.10 };
+const PRICE_FIX_THRESHOLD_CENTS = 125; 
+const WEIGHTS = { common: 0.75, uncommon: 0.17, rare: 0.08 };
 
 function average(arr) {
   return arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
@@ -63,10 +63,6 @@ export async function fetchAndNormalize(appID, itemClassTag) {
   );
 }
 
-/**
- * @param {{ cards: Array, backgrounds: Array, emoticons: Array }} data
- * @returns {{ craftCost: number, bgEV: number, emoEV: number, total: number }}
- */
 export function computeEV({ cards, backgrounds, emoticons }) {
   const craftCost = cards.reduce((sum, c) => sum + c.sell_price, 0);
   const steamFee = 0.87;
@@ -91,10 +87,11 @@ export function computeEV({ cards, backgrounds, emoticons }) {
     0
   );
 
+  //TODO: decide on the full info view panel 
   return {
-    craftCost,
-    bgEV,
-    emoEV,
+    //craftCost,
+    //bgEV,
+    //emoEV,
     total: bgEV + emoEV - craftCost
   };
 }

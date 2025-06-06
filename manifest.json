@@ -1,10 +1,10 @@
 {
   "name": "Steam EV Extension",
-  "version": "1.0.1",
-  "description": "Craft EV panels on Steam app pages, modular code without import/export",
+  "version": "1.0.3",
+  "description": "Steam badges-craft profits info ",
   "manifest_version": 3,
 
-  "permissions": ["tabs", "activeTab"],
+  
 
   "host_permissions": [
     "https://store.steampowered.com/*",
