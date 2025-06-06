@@ -4,7 +4,7 @@
   "description": "Steam badges-craft profits info ",
   "manifest_version": 3,
 
-  "permissions": ["tabs", "activeTab"],
+  
 
   "host_permissions": [
     "https://store.steampowered.com/*",
