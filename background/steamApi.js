@@ -89,9 +89,9 @@ export function computeEV({ cards, backgrounds, emoticons }) {
 
   //TODO: decide on the full info view panel 
   return {
-    //craftCost,
-    //bgEV,
-    //emoEV,
+    craftCost,
+    bgEV,
+    emoEV,
     total: bgEV + emoEV - craftCost
   };
 }
