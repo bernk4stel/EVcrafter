@@ -7,7 +7,7 @@
 
 #### Weighted EV Calculation
 
-> - Uses the standard 70% common / 20% uncommon / 10% rare probability distribution to compute:
+> - Uses the 75% common / 17% uncommon / 8% rare probability distribution to compute:
 > <br> Average background value
 > <br> Average emoticon value
 > <br> Total EV = (bgEV + emoEV) − crafting cost
