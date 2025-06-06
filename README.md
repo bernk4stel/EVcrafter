@@ -1,7 +1,7 @@
 <h2>Steam Craft EV Calculator Extension</h2>
 
 
-##### Currently working on reducing avoidable requests to prevent 429 STATUS. ✔️ 
+##### ⚠️ Currently working on reducing avoidable requests to prevent 429 STATUS.  
 
 #### A lightweight Chrome extension that displays the expected value (EV) of crafting Steam trading card badges directly on app's page.
 >
