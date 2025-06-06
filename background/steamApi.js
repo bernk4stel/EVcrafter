@@ -1,6 +1,6 @@
 
 const PRICE_FIX_THRESHOLD_CENTS = 150; 
-const WEIGHTS = { common: 0.70, uncommon: 0.20, rare: 0.10 };
+const WEIGHTS = { common: 0.75, uncommon: 0.17, rare: 0.08 };
 
 function average(arr) {
   return arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
