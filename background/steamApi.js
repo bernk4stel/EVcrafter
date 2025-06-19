@@ -1,6 +1,6 @@
 
 const PRICE_FIX_THRESHOLD_CENTS = 125; 
-const WEIGHTS = { common: 0.75, uncommon: 0.17, rare: 0.08 };
+const WEIGHTS = { common: 0.72, uncommon: 0.18, rare: 0.10 };
 
 function average(arr) {
   return arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
@@ -41,7 +41,7 @@ export async function fetchAndNormalize(appID, itemClassTag) {
   return Promise.all(
     results.map(async (item) => {
       const cents = item.sell_price;
-      if (cents === 0 || cents > PRICE_FIX_THRESHOLD_CENTS) {
+      if (itemClassTag != "tag_item_class_2" && (cents === 0 || cents > PRICE_FIX_THRESHOLD_CENTS)) {
         try {
           const last = await fetchLastSalePrice(
             item.asset_description.market_hash_name

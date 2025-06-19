@@ -45,35 +45,3 @@ h1 {
   margin: 7px 7px 0 0;
 }
 
-#ev-panel-container {
-  border: 1px solid #0a1117;
-  background: #0f151f;
-  padding: 8px;
-  margin-bottom: 12px;
-  border-radius: 4px;
-}
-
-
-#ev-panel-container h3 {
-  margin: 0 0 6px 0;
-  font-size: 15px;
-}
-#ev-panel-container a {
-  margin: 12px 0 12px 0;
-  color: #4489b1;
-  text-decoration: none;
-}
-#ev-panel-container a:hover {
-  text-decoration: underline;
-  color: #4d9cca;
-}
-
-#ev-panel-container ul {
-  padding-left: 18px;
-  color: #2E9AF2;
-  margin: 0;
-}
-
-#ev-panel-container ul li {
-  margin-bottom: 4px;
-}
