@@ -1,7 +1,7 @@
 {
   "name": "Steam EV Extension",
-  "version": "1.0.3",
-  "description": "Steam badges-craft profits info ",
+  "version": "1.0.4",
+  "description": "Badge crafting helper",
   "manifest_version": 3,
 
   
@@ -27,13 +27,23 @@
     {
       "matches": ["https://store.steampowered.com/app/*"],
       "js": [
-        "content/fetchClient.js",
-        "content/dom.js",
-        "content/bootstrap.js"
+        "content/app/fetchClient.js",
+        "content/app/dom.js",
+        "content/app/bootstrap.js"
       ],
-      "css": ["styles.css"],
+      "css": ["content/app/styles.css"],
       "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://steamcommunity.com/market/listings/753/*"],
+      "js":[
+        "content/market/dom.js",
+        "content/market/bootstrap.js"
+      ],
+      "css":["content/market/styles.css"],
+      "run_at":"document_idle"
     }
+    
   ],
 
   "icons": {
