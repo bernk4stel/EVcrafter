@@ -1,5 +1,8 @@
+const defaultConfig = {
+  PRICE_FIX_THRESHOLD_CENTS: 75
+};
 
-const PRICE_FIX_THRESHOLD_CENTS = 125; 
+
 const WEIGHTS = { common: 0.72, uncommon: 0.18, rare: 0.10 };
 
 function average(arr) {
@@ -22,7 +25,6 @@ export async function fetchAndNormalize(appID, itemClassTag) {
   url.searchParams.set("norender", "1");
   url.searchParams.set("appid", "753");
   url.searchParams.set("q", ""); 
-  //TODO: decide whether to fixate the currency IDKKKKKKKKKKKKK STUPID ASS API NO DOCS BRO KAEFJSLKD:FJSDLK:FJKSL:D"FJWEIO)P{FSEPOI} SUKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   url.searchParams.set("currency", "1");    
   
   url.searchParams.set("l", "english");
