@@ -1,9 +1,4 @@
-const defaultConfig = {
-  PRICE_FIX_THRESHOLD_CENTS: 75
-};
-
-
-const WEIGHTS = { common: 0.72, uncommon: 0.18, rare: 0.10 };
+import { getConfig } from "./config.js";
 
 function average(arr) {
   return arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
@@ -21,6 +16,7 @@ function rarityOf(typeStr) {
 }
 
 export async function fetchAndNormalize(appID, itemClassTag) {
+  const { threshold } = getConfig();
   const url = new URL("https://steamcommunity.com/market/search/render/");
   url.searchParams.set("norender", "1");
   url.searchParams.set("appid", "753");
@@ -43,7 +39,7 @@ export async function fetchAndNormalize(appID, itemClassTag) {
   return Promise.all(
     results.map(async (item) => {
       const cents = item.sell_price;
-      if (itemClassTag != "tag_item_class_2" && (cents === 0 || cents > PRICE_FIX_THRESHOLD_CENTS)) {
+      if (itemClassTag != "tag_item_class_2" && (cents === 0 || cents > threshold)) {
         try {
           const last = await fetchLastSalePrice(
             item.asset_description.market_hash_name
@@ -66,6 +62,8 @@ export async function fetchAndNormalize(appID, itemClassTag) {
 }
 
 export function computeEV({ cards, backgrounds, emoticons }) {
+  const { commonWeight, uncommonWeight, rareWeight } = getConfig();
+  const WEIGHTS = { common: commonWeight, uncommon: uncommonWeight, rare: rareWeight };
   const craftCost = cards.reduce((sum, c) => sum + c.sell_price, 0);
   const steamFee = 0.87;
 

@@ -1,55 +1,64 @@
-body {
+* {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #171a21;
+}
+
+body {
+  display: flex; 
+  justify-content: center;
+  align-items: flex-start;
+  font-family: 'Roboto', Arial, sans-serif;
+  background: linear-gradient(135deg,
+    #171a21 0%,
+    #1b2838 50%,
+    #2a475e 100%
+  );
+  background-size: 300% 300%;
+  animation: gradientShift 15s ease infinite;
   color: #c6d4df;
 }
 
-h1 {
-  font-size: 18px;
-  margin: 15px 0 6px 0;
-  color: #66c0f4;
+@keyframes gradientShift {
+  0%   { background-position:   0%   0%; }
+  50%  { background-position: 100% 100%; }
+  100% { background-position:   0%   0%; }
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
   width: 200px;
-  padding: 0 5px 15px 15px;
+  height: 100%;             
+  padding: 8px 5px 0 15px; 
 }
+
 
 .header {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 
-.links a img {
-  display: block;
-  width: 32px;
-  height: 32px;
-  margin: 7px 7px 0 0;
+h1 {
+  text-align: center;
+  font-size: 18px;
+  color: #66c0f4;
 }
-
 
 .support {
   font-size: 12px;
-  margin: 0;
 }
-
 
 .footer {
   display: flex;
-  flex-direction: row;
-  align-items: start;
   justify-content: space-between;
   align-items: center;
-  margin-top: 15px;
+  margin-top: auto; 
 }
+
 .footer #version {
   font-size: 9px;
   color: #345773;
-  max-width: fit-content;
 }
 
 .footer #options-btn {
@@ -57,10 +66,14 @@ h1 {
   border: none;
   height: 24px;
   width: 24px;
-  padding: 0;
-  margin-right:4%;
+  margin-right: 1vw;
 }
+
 .footer #options-btn:hover {
   background-color: #66c0f4;
 }
 
+.links a img {
+  width: 32px;
+  height: 32px;
+}

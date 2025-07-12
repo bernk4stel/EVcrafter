@@ -1,12 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVCrafter Options</title>
+    <title>Extension Options</title>
     <link rel="stylesheet" href="options.css">
 </head>
+
 <body>
-    
+    <div class="container">
+        <div class="header">
+            <h1>Extension Configuration</h1>
+        </div>
+
+        <div class="content">
+            <form id="optionsForm">
+                <div class="form-section">
+                    <div class="section-title">Weights configuration</div>
+
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="commonWeight">Common:</label>
+                            <div class="input-wrapper"
+                                data-tooltip="The chance of dropping the item given rarity. This is used to calculate EV, these values are not 100% right (based on statistics) and can be tweaked.">
+                                <input type="number" value="0.75" step=".01" min="0" max="1" id="commonWeight"
+                                    name="commonWeight">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="uncommonWeight">Uncommon:</label>
+                            <div class="input-wrapper"
+                                data-tooltip="The chance of dropping the item given rarity. This is used to calculate EV, these values are not 100% right (based on statistics) and can be tweaked.">
+                                <input type="number" value="0.15" step=".01" min="0" max="1" id="uncommonWeight"
+                                    name="uncommonWeight">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="rareWeight">Rare:</label>
+                            <div class="input-wrapper"
+                                data-tooltip="The chance of dropping the item given rarity. This is used to calculate EV, these values are not 100% right (based on statistics) and can be tweaked.">
+                                <input type="number" value="0.10" step=".01" min="0" max="1" id="rareWeight"
+                                    name="rareWeight">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="section-title">Threshold</div>
+                    <div class="form-group">
+                        <label for="threshold">Re-request price threshold:</label>
+                        <div class="input-wrapper"
+                            data-tooltip="Price (in cents) threshold after which the price is fetched again - to retrieve the last sold price instead of the cheapest offer. This is used to avoid suspiciously overpriced items influencing expected value.">
+
+                            <input type="number" id="threshold" value="100" name="threshold">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-section">
+                    <div class="section-title">Feature Toggles</div>
+
+                    <div class="checkbox-group">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="debugMode" name="debugMode">
+                        </div>
+                        <label for="debugMode"
+                            data-tooltip="Enable detailed logging and debugging information. This will show additional console messages and may impact performance. Only enable when troubleshooting issues.">Debug
+                            Mode</label>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="bottom-button save-btn">Save Configuration</button>
+                    <button type="button" class="bottom-button reset-btn" id="resetBtn">Reset Defaults</button>
+                </div>
+            </form>
+
+            <div id="statusMessage" class="status-message"></div>
+        </div>
+    </div>
+
+    <script src="options.js"></script>
 </body>
+
 </html>

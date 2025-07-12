@@ -1,15 +1,18 @@
 {
   "name": "Steam EV Extension",
-  "version": "1.0.4",
+  "version": "2.0",
   "description": "Badge crafting helper",
   "manifest_version": 3,
 
+
+
+  "permissions": ["storage"],
   "options_ui": {
   "page": "options/options.html",
   "open_in_tab": true
   },
+  
 
-  "permissions": ["storage"],
 
   "host_permissions": [
     "https://store.steampowered.com/*",

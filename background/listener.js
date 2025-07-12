@@ -1,4 +1,4 @@
-import { fetchAndNormalize, computeEV } from "./steamApi.js";
+import * as steamAPI from "./steamApi.js";
 
 const ACTIONS = {
   FETCH_CARDS: "FETCH_CARDS",
@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
     action === ACTIONS.FETCH_CRAFT_EMOTICONS
   ) {
     const itemClassTag = TAG_MAP[action];
-    fetchAndNormalize(appID, itemClassTag)
+    steamAPI.fetchAndNormalize(appID, itemClassTag)
       .then((arr) => {
         let key = "";
         if (action === ACTIONS.FETCH_CARDS) key = "cards";
@@ -39,14 +39,14 @@ chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
 
   if (action === ACTIONS.GET_ALL) {
     const promises = [
-      fetchAndNormalize(appID, TAG_MAP[ACTIONS.FETCH_CARDS]),
-      fetchAndNormalize(appID, TAG_MAP[ACTIONS.FETCH_CRAFT_BACKGROUNDS]),
-      fetchAndNormalize(appID, TAG_MAP[ACTIONS.FETCH_CRAFT_EMOTICONS])
+      steamAPI.fetchAndNormalize(appID, TAG_MAP[ACTIONS.FETCH_CARDS]),
+      steamAPI.fetchAndNormalize(appID, TAG_MAP[ACTIONS.FETCH_CRAFT_BACKGROUNDS]),
+      steamAPI.fetchAndNormalize(appID, TAG_MAP[ACTIONS.FETCH_CRAFT_EMOTICONS])
     ];
 
     Promise.all(promises)
       .then(([cards, backgrounds, emoticons]) => {
-        const evData = computeEV({ cards, backgrounds, emoticons });
+        const evData = steamAPI.computeEV({ cards, backgrounds, emoticons });
         sendResponse({ success: true, cards, backgrounds, emoticons, evData });
       })
       .catch((err) => {
