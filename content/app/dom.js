@@ -24,7 +24,7 @@ window.evExtension = window.evExtension || {};
     heading.style.color = "#326085";
     container.appendChild(heading);
 
-    //TODO: make the currency not hard coded
+    //TODO: add currency symbol depending on the account pref 
     const evSection = document.createElement("div");
     evSection.innerHTML = `
       <strong>Crafting Cost:</strong> ${formatCents(evData.craftCost)}<br>
