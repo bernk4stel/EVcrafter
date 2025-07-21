@@ -80,7 +80,7 @@ h1 {
 }
 
 #options-btn:hover .gear {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
   fill: #66c0f4;
 }
 
