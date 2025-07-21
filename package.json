@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "sass": "^1.89.2"
+  },
+    "scripts": {
+      "build:css": "sass options/stars.scss options/stars.css --no-source-map --style=compressed"
+  }
+}

@@ -8,24 +8,16 @@
 
 body {
     font-family: 'Roboto', Arial, sans-serif;
-    background: linear-gradient(135deg,
-            #171a21 0%,
-            #1b2838 50%,
-            #2a475e 100%);
-    background-size: 300% 300%;
-    animation: gradientShift 15s ease infinite;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
     min-height: 100vh;
     padding: 20px;
     color: #c7d5e0;
 }
 
-@keyframes gradientShift {
-    0%   { background-position: 0% 0%; }
-    50%  { background-position: 100% 100%; }
-    100% { background-position: 0% 0%; }
-}
 
 .container {
+    position: relative;
+    z-index: 1;
     max-width: 900px;
     margin: 0 auto;
     background: linear-gradient(135deg, #1e2328 0%, #2a475e 100%);
