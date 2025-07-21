@@ -46,14 +46,25 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="form-section">
-                    <div class="section-title">Threshold</div>
+                    <div class="section-title">Re-fetch constants</div>
+
                     <div class="form-group">
-                        <label for="threshold">Re-request price threshold:</label>
+                        <label for="threshold">Price threshold:</label>
                         <div class="input-wrapper"
                             data-tooltip="Price (in cents) threshold after which the price is fetched again - to retrieve the last sold price instead of the cheapest offer. This is used to avoid suspiciously overpriced items influencing expected value.">
 
                             <input type="number" id="threshold" value="100" name="threshold">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cacheLifetime">
+                            Cache lifetime (seconds):
+                        </label>
+                        <div class="input-wrapper"
+                            data-tooltip="How long (in seconds) to keep EV results cached before re‑fetching.">
+                            <input type="number" id="cacheLifetime" name="cacheLifetime" min="0" step="60" value="3600">
                         </div>
                     </div>
 

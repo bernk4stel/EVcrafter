@@ -8,6 +8,7 @@ form.addEventListener("submit", e => {
         uncommonWeight: parseFloat(form.uncommonWeight.value),
         rareWeight: parseFloat(form.rareWeight.value),
         threshold: parseInt(form.threshold.value, 10),
+        cacheLifetime:  parseInt(form.cacheLifetime.value, 10),
         debugMode: form.debugMode.checked,
     };
     chrome.storage.sync.set({ config }, () => {
@@ -30,6 +31,7 @@ window.addEventListener("DOMContentLoaded", () => {
         form.rareWeight.value = config.rareWeight;
         form.threshold.value = config.threshold;
         form.debugMode.checked = config.debugMode;
+        form.cacheLifetime.value = config.cacheLifetime;
     });
 });
 
