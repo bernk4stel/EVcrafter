@@ -1,11 +1,29 @@
 #ev-panel-container {
   border: 1px solid #0a1117;
-  background: #0f151f;
+  background: linear-gradient(270deg, #11151E 0%, #191F2C 100%);
+  padding: 20px 30px;
+  position: relative;
+  overflow: hidden;
   padding: 8px;
   margin-bottom: 12px;
   border-radius: 4px;
 }
 
+#ev-panel-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.034) 50%, transparent 70%);
+    animation: shine 5s ease-out infinite;
+}
+
+@keyframes shine {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
 
 #ev-panel-container h3 {
   margin: 0 0 6px 0;
