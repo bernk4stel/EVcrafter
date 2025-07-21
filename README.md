@@ -1,4 +1,5 @@
-<img width="219" height="83" alt="3" src="https://github.com/user-attachments/assets/3595694c-46a3-4729-863e-9eb878d6f9d2" />
+<img width="219" height="76" alt="image" src="https://github.com/user-attachments/assets/af390c00-a44b-4c74-bb8e-f3bdb0b5963d" />
+
 
 
 <br>
@@ -14,9 +15,3 @@ Open
 >  Average background value
 > <br> Average emoticon value
 > <br> Total EV = (bgEV + emoEV) − crafting cost
-
-
-##### ⚠️ Currently working on reducing avoidable requests to prevent 429 STATUS. (rates: 20 per minute, 1000 per day).
-##### TODO (12.07): Use cached results of frequently fetched results & abort the further fetching when one fails & letting the user configure the threshold of refetching.
-
-
