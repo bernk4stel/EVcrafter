@@ -1,3 +1,14 @@
+document.addEventListener('DOMContentLoaded', () => {
+   const night = document.querySelector('.night');
+  for (let i = 0; i < 20; i++) {
+    const star = document.createElement('div');
+    star.className = 'shooting_star';
+    night.insertBefore(star, night.firstChild);
+  }
+
+
+});
+
 const form = document.getElementById("optionsForm");
 const statusMsg = document.getElementById("statusMessage");
 

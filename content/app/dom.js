@@ -4,13 +4,18 @@ window.evExtension = window.evExtension || {};
   function formatCents(cents) {
     return (cents / 100).toFixed(2);
   }
+  const walletEl = document.getElementById('header_wallet_balance');
+  const walletText = walletEl.textContent.trim();               // "1 053,44₴"
+  const currencySymbol = walletText.replace(/[\d\s.,]/g, '');
+
+
   // TODO: add popup panel to use cards/bg/emo data on user's request.
   // window.evExtension.renderPanels = function ({ cards, backgrounds, emoticons, evData, appID}) {
-  window.evExtension.renderPanels = function ({ evData, appID}) {
+  window.evExtension.renderPanels = function ({ evData, appID }) {
 
     container = document.createElement("div");
     container.id = "ev-panel-container";
-    
+
     const refNode = document.querySelector("div.block.responsive_apppage_details_right");
     if (refNode && refNode.parentNode) {
       refNode.parentNode.insertBefore(container, refNode);
@@ -24,18 +29,19 @@ window.evExtension = window.evExtension || {};
     heading.innerText = "Craft EV Score";
     heading.style.color = "#326085";
     container.appendChild(heading);
-
+    const totalColor = evData.total < 0 ? "#d64a4aff" : "#39be75ff";
     //TODO: add currency symbol depending on the account pref 
     const evSection = document.createElement("div");
     evSection.innerHTML = `
-      <strong>Crafting Cost:</strong> ${formatCents(evData.craftCost)}<br>
-      <strong>Avg. Background (weighted):</strong> ${formatCents(evData.bgEV)}<br>
-      <strong>Avg. Emoticon (weighted):</strong> ${formatCents(evData.emoEV)}<br>
-      <strong>Total EV:</strong> ${formatCents(evData.total)}
+      <strong>Crafting Cost:</strong> ${formatCents(evData.craftCost)}${currencySymbol}<br>
+      <strong>Avg. Background (weighted):</strong> ${formatCents(evData.bgEV)}${currencySymbol}<br>
+      <strong>Avg. Emoticon (weighted):</strong> ${formatCents(evData.emoEV)}${currencySymbol}<br>
+      <strong>Total EV:</strong>
+        <span style="color: ${totalColor}">${formatCents(evData.total)}${currencySymbol}</span>
     `;
     container.appendChild(evSection);
-    
-    
+
+
 
     const a = document.createElement("a");
     a.id = "ev-outer-link";
@@ -43,7 +49,7 @@ window.evExtension = window.evExtension || {};
     a.innerText = "View Badge Page";
     a.target = "_blank";
 
-    
+
     container.appendChild(a);
   };
 })();
