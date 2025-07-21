@@ -1,32 +1,19 @@
-import { getConfig } from "./config.js";
+import { getThreshold, getRarityWeights } from "./config.js";
 
-function average(arr) {
-  return arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
-}
 
-function centsFromUnits(units) {
-  return Math.round(units * 100);
-}
-
-function rarityOf(typeStr) {
-  const lower = (typeStr || "").toLowerCase();
-  if (lower.includes("rare")) return "rare";
-  if (lower.includes("uncommon")) return "uncommon";
-  return "common";
-}
 
 export async function fetchAndNormalize(appID, itemClassTag) {
-  const { threshold } = getConfig();
+  const threshold  = getThreshold();
   const url = new URL("https://steamcommunity.com/market/search/render/");
-  url.searchParams.set("norender", "1");
-  url.searchParams.set("appid", "753");
-  url.searchParams.set("q", ""); 
+  url.searchParams.set("norender", "1");                  //No html
+  url.searchParams.set("appid", "753");                   //Badge related market id
+  url.searchParams.set("q", "");                          //i forgot 💀
   url.searchParams.set("currency", "1");    
   
   url.searchParams.set("l", "english");
-  url.searchParams.set("category_753_Game[]", `tag_app_${appID}`);
-  url.searchParams.set("category_753_item_class[]", itemClassTag);
-  if (itemClassTag === "tag_item_class_2") {
+  url.searchParams.set("category_753_Game[]", `tag_app_${appID}`);              //sort by game id 
+  url.searchParams.set("category_753_item_class[]", itemClassTag);              //sort by drop type  (2 - card, 3-background, 4-emoticon)
+  if (itemClassTag === "tag_item_class_2") {                                    // if card, then fetch only non-foil type
     url.searchParams.set("category_753_cardborder[]", "tag_cardborder_0");
   }
 
@@ -36,10 +23,12 @@ export async function fetchAndNormalize(appID, itemClassTag) {
   }
   const { results = [] } = await resp.json();
 
+
+  //refetch some results before giving the final array
   return Promise.all(
     results.map(async (item) => {
       const cents = item.sell_price;
-      if (itemClassTag != "tag_item_class_2" && (cents === 0 || cents > threshold)) {
+      if (itemClassTag != "tag_item_class_2" && (cents === 0 || cents > threshold)) {    //no class2 items need the check most of the time / spares the request rate limit. could result +-10% price deviation worst case
         try {
           const last = await fetchLastSalePrice(
             item.asset_description.market_hash_name
@@ -55,37 +44,29 @@ export async function fetchAndNormalize(appID, itemClassTag) {
           );
         }
       }
-      item.rarity = rarityOf(item.asset_description.type || "");
+      item.rarity = rarityOf(item.asset_description.type || "");    //parsed normalized type  common/uncommon/rare
       return item;
     })
   );
 }
 
+
+
 export function computeEV({ cards, backgrounds, emoticons }) {
-  const { commonWeight, uncommonWeight, rareWeight } = getConfig();
-  const WEIGHTS = { common: commonWeight, uncommon: uncommonWeight, rare: rareWeight };
+function expectedValue(items) {
+    return Object.entries(WEIGHTS).reduce(
+      (sum, [rarity, weight]) =>
+        sum + weight * avgByRarity(items, rarity) * steamFee,
+      0
+    );
+}
+
+  const WEIGHTS = getRarityWeights();
   const craftCost = cards.reduce((sum, c) => sum + c.sell_price, 0);
   const steamFee = 0.87;
 
-  function avgByRarity(arr, rarity) {
-    return average(
-      arr
-        .filter((item) => item.rarity === rarity)
-        .map((item) => item.sell_price)
-    );
-  }
-
-  const bgEV = Object.entries(WEIGHTS).reduce(
-    (sum, [rarity, weight]) =>
-      sum + weight * avgByRarity(backgrounds, rarity) * steamFee,
-    0
-  );
-
-  const emoEV = Object.entries(WEIGHTS).reduce(
-    (sum, [rarity, weight]) =>
-      sum + weight * avgByRarity(emoticons, rarity) * steamFee,
-    0
-  );
+  const bgEV  = expectedValue(backgrounds);
+  const emoEV = expectedValue(emoticons);
 
   //TODO: decide on the full info view panel 
   return {
@@ -103,8 +84,44 @@ async function fetchLastSalePrice(marketHashName) {
 
   const resp = await fetch(url.toString(), { credentials: "include" });
   if (!resp.ok) throw new Error(`PriceHistory failed: HTTP ${resp.status}`);
+  
   const json = await resp.json();
   if (!Array.isArray(json.prices) || json.prices.length === 0) return null;
-  // [ "Apr 11 2025 01: +0", <float>, "<vol>" ]
+
+
+  // [ "dateUTC", <price (float)>, "<volume sold>" ]
+  //[ "Jul 20 2025 23: +0", 2.163, "5" ]
   return json.prices[json.prices.length - 1][1];
+}
+
+
+
+
+
+
+function average(arr) {
+  return arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+}
+
+function centsFromUnits(units) {
+  return Math.round(units * 100);
+}
+
+function avgByRarity(arr, rarity) {
+    return average(
+      arr
+        .filter((item) => item.rarity === rarity)
+        .map((item) => item.sell_price)
+    );
+}
+
+
+//"type": "Dota 2 Emoticon",
+//"type": "Dota 2 Uncommon Emoticon",
+//"type": "Dota 2 Rare Emoticon",
+function rarityOf(typeStr) {
+  const lower = (typeStr || "").toLowerCase();
+  if (lower.includes("rare")) return "rare";
+  if (lower.includes("uncommon")) return "uncommon";
+  return "common";
 }

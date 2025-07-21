@@ -7,6 +7,7 @@ window.evExtension = window.evExtension || {};
   // TODO: add popup panel to use cards/bg/emo data on user's request.
   // window.evExtension.renderPanels = function ({ cards, backgrounds, emoticons, evData, appID}) {
   window.evExtension.renderPanels = function ({ evData, appID}) {
+
     container = document.createElement("div");
     container.id = "ev-panel-container";
     

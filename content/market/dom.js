@@ -9,7 +9,7 @@ window.evExtension = window.evExtension || {};
     a.href = `https://www.steamcardexchange.net/index.php?gamepage-appid-${appID}/`;
     a.innerText = "Showcase Page";
     a.target = "_blank";
-    
+    a.style.padding = "10px 25px";
 
     const refNode = document.getElementById('largeiteminfo_content');
     refNode.appendChild(a);

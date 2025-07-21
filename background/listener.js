@@ -1,4 +1,5 @@
 import * as steamAPI from "./steamApi.js";
+import * as cacheAPI from "./cache.js";
 
 const ACTIONS = {
   FETCH_CARDS: "FETCH_CARDS",
@@ -37,25 +38,33 @@ chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
     return true; 
   }
 
-  if (action === ACTIONS.GET_ALL) {
-    const promises = [
-      steamAPI.fetchAndNormalize(appID, TAG_MAP[ACTIONS.FETCH_CARDS]),
-      steamAPI.fetchAndNormalize(appID, TAG_MAP[ACTIONS.FETCH_CRAFT_BACKGROUNDS]),
-      steamAPI.fetchAndNormalize(appID, TAG_MAP[ACTIONS.FETCH_CRAFT_EMOTICONS])
-    ];
+ if (action === ACTIONS.GET_ALL) {
+  cacheAPI.getCachedEV(appID)
+    .then((cached) => {
+      if (cached) {
+        sendResponse({ success: true, evData: cached });        // cached = { craftCost, bgEV, emoEV, total }
+        return;
+      }
 
-    Promise.all(promises)
-      .then(([cards, backgrounds, emoticons]) => {
-        const evData = steamAPI.computeEV({ cards, backgrounds, emoticons });
-        sendResponse({ success: true, cards, backgrounds, emoticons, evData });
-      })
-      .catch((err) => {
-        console.error("Error in GET_ALL:", err);
-        sendResponse({ success: false, error: err.message });
-      });
+      // cache miss -> full fetch as always and then cache
+      return Promise.all([
+        steamAPI.fetchAndNormalize(appID, TAG_MAP[ACTIONS.FETCH_CARDS]),
+        steamAPI.fetchAndNormalize(appID, TAG_MAP[ACTIONS.FETCH_CRAFT_BACKGROUNDS]),
+        steamAPI.fetchAndNormalize(appID, TAG_MAP[ACTIONS.FETCH_CRAFT_EMOTICONS]),
+      ])
+        .then(([cards, backgrounds, emoticons]) => {
+          const evData = steamAPI.computeEV({ cards, backgrounds, emoticons });
+          cacheAPI.setCachedEV(appID, evData).catch(console.warn);
+          sendResponse({ success: true, cards, backgrounds, emoticons, evData });
+        });
+    })
+    .catch((err) => {
+      console.error("Error in GET_ALL:", err);
+      sendResponse({ success: false, error: err.message });
+    });
 
-    return true; 
-  }
+  return true;
+}
 
   sendResponse({ success: false, error: "Unknown action" });
   return false;
