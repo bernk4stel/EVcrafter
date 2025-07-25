@@ -4,9 +4,9 @@ window.evExtension = window.evExtension || {};
   function formatCents(cents) {
     return (cents / 100).toFixed(2);
   }
-  const walletEl = document.getElementById('header_wallet_balance');
+  const walletEl = document.getElementById("header_wallet_balance");
   const walletText = walletEl.textContent.trim();               // "1 053,44₴"
-  const currencySymbol = walletText.replace(/[\d\s.,]/g, '');
+  const currencySymbol = walletText.replace(/[\d\s.,]/g, "");
 
 
   // TODO: add popup panel to use cards/bg/emo data on user's request.
@@ -48,7 +48,7 @@ window.evExtension = window.evExtension || {};
     a.href = `https://steamcommunity.com/my/gamecards/${appID}/`;
     a.innerText = "View Badge Page";
     a.target = "_blank";
-
+    
 
     container.appendChild(a);
   };

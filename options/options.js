@@ -1,14 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-   const night = document.querySelector('.night');
-  for (let i = 0; i < 20; i++) {
-    const star = document.createElement('div');
-    star.className = 'shooting_star';
-    night.insertBefore(star, night.firstChild);
-  }
-
-
-});
-
 const form = document.getElementById("optionsForm");
 const statusMsg = document.getElementById("statusMessage");
 
@@ -19,11 +8,11 @@ form.addEventListener("submit", e => {
         uncommonWeight: parseFloat(form.uncommonWeight.value),
         rareWeight: parseFloat(form.rareWeight.value),
         threshold: parseInt(form.threshold.value, 10),
-        cacheLifetime:  parseInt(form.cacheLifetime.value, 10),
+        cacheLifetime: parseInt(form.cacheLifetime.value, 10),
         debugMode: form.debugMode.checked,
     };
     chrome.storage.sync.set({ config }, () => {
-       showStatusMessage("Configuration changed successfully! ✅")
+        showStatusMessage("Configuration changed successfully! ✅")
     });
 });
 
@@ -34,7 +23,20 @@ document.getElementById("resetBtn").addEventListener("click", () => {
     });
 });
 
+document.getElementById("cacheFlushBtn").addEventListener("click", () => {
+    chrome.storage.local.clear(() => {
+        showStatusMessage("Cache flushed! 🗑️", "success");
+    });
+});
+
 window.addEventListener("DOMContentLoaded", () => {
+    const night = document.querySelector('.night');
+    for (let i = 0; i < 20; i++) {
+        const star = document.createElement('div');
+        star.className = 'shooting_star';
+        night.insertBefore(star, night.firstChild);
+    }
+
     chrome.storage.sync.get("config", ({ config }) => {
         if (!config) return;
         form.commonWeight.value = config.commonWeight;
