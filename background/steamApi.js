@@ -8,7 +8,7 @@ export async function fetchAndNormalize(appID, itemClassTag) {
   url.searchParams.set("norender", "1");                  //No html
   url.searchParams.set("appid", "753");                   //Badge related market id
   url.searchParams.set("q", "");                          //i forgot 💀
-  url.searchParams.set("currency", "1");    
+  //url.searchParams.set("currency", "1");    
   
   url.searchParams.set("l", "english");
   url.searchParams.set("category_753_Game[]", `tag_app_${appID}`);              //sort by game id 
@@ -22,8 +22,14 @@ export async function fetchAndNormalize(appID, itemClassTag) {
     throw new Error(`Market fetch failed: HTTP ${resp.status}`);
   }
   const { results = [] } = await resp.json();
-
-
+  
+  if(itemClassTag === "tag_item_class_2") {
+    results.map(async (card) => {
+      const uri_hash = encodeURI(card.asset_description.market_hash_name);
+      card.market_uri_hash = uri_hash;
+    });
+  }
+  
   //refetch some results before giving the final array
   return Promise.all(
     results.map(async (item) => {
