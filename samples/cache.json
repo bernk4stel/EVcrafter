@@ -1,0 +1,72 @@
+evCache_1238060	{
+    "timestamp": 1753487238394,
+    "value": {
+        "bgEV": 9296.9505,
+        "craftCost": 4497,
+        "emoEV": 158.6445,
+        "total": 4958.595000000001
+    }
+}
+evHashes_tag_item_class_2_1238060	[
+    "1238060-3",
+    "1238060-05",
+    "1238060-01",
+    "1238060-02",
+    "1238060-4"
+]
+evHashes_tag_item_class_3_1238060	[
+    "1238060-Theme I",
+    "1238060-Theme III",
+    "1238060-Theme II"
+]
+evHashes_tag_item_class_4_1238060	[
+    "1238060-:DS3_DoubleLetter:",
+    "1238060-:DS3_ExclamationPoint:",
+    "1238060-:DS3_QuestionMark:",
+    "1238060-:DS3_TH:",
+    "1238060-:DS3_SS:"
+]
+
+
+evCache_1451160	{
+    "timestamp": 1753487110727,
+    "value": {
+        "bgEV": 18409.955159999998,
+        "craftCost": 8777,
+        "emoEV": 240.22377857142857,
+        "total": 9873.178938571426
+    }
+}
+evHashes_tag_item_class_2_1451160	[
+    "1451160-Umetaro Saitani",
+    "1451160-Heisuke Todo",
+    "1451160-Isami Kondo",
+    "1451160-Susumu Yamazaki",
+    "1451160-Hajime Saito",
+    "1451160-Shinpachi Nagakura",
+    "1451160-Sanosuke Harada",
+    "1451160-Keisuke Yamanami",
+    "1451160-Souji Okita",
+    "1451160-Toshizo Hijikata"
+]
+evHashes_tag_item_class_3_1451160	[
+    "1451160-Okita and Yamanami",
+    "1451160-Kondo and Hijikata",
+    "1451160-Yamazaki and Saitani",
+    "1451160-Cherry blossom",
+    "1451160-Shinsengumi",
+    "1451160-Harada and Todo",
+    "1451160-Nagakura and Saito"
+]
+evHashes_tag_item_class_4_1451160	[
+    "1451160-:SanosukeHarada:",
+    "1451160-:SusumuYamazaki:",
+    "1451160-:KeisukeYamanami:",
+    "1451160-:HajimeSaito:",
+    "1451160-:HeisukeTodo:",
+    "1451160-:ShinpachiNagakura:",
+    "1451160-:UmetaroSaitani:",
+    "1451160-:ToshizoHijikata:",
+    "1451160-:IsamiKondo:",
+    "1451160-:SoujiOkita:"
+]

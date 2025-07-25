@@ -13,11 +13,9 @@ function getAppId() {
   }
 
   try {
-    const response = await window.evExtension.fetchAll(appID);
-    window.evExtension.renderPanels({
-      evData: response.evData,
-      appID: appID
-  });
+    const {evData} = await window.evExtension.fetchAll(appID);
+    const hashes = await window.evExtension.getCachedHashes(appID, "tag_item_class_2");
+    window.evExtension.renderPanels({evData, hashes, appID: appID});
   } catch (err) {
     console.error("Error fetching data:", err);
   }
