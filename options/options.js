@@ -1,5 +1,4 @@
 const form = document.getElementById("optionsForm");
-const statusMsg = document.getElementById("statusMessage");
 
 form.addEventListener("submit", e => {
     e.preventDefault();

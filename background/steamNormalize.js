@@ -1,6 +1,5 @@
 import { fetchMarket } from "./steamFetch.js";
 import { getThreshold, getRarityWeights, isDebug} from "./config.js";
-import { getCachedHashes, setCachedHashes } from "./cache.js";
 
 export async function fetchAndNormalize(appID, itemClassTag) {
   const threshold = getThreshold();
