@@ -1,10 +1,10 @@
 const DEFAULTS = {
 
-  commonWeight:   0.75,
-  uncommonWeight: 0.15,
-  rareWeight:     0.10,
+  commonWeight:   0.71,
+  uncommonWeight: 0.18,
+  rareWeight:     0.11,
 
-  threshold: 100,
+  threshold: 170,
   cacheLifetime:  3600, //1hour for now
   debugMode: false,
 };
